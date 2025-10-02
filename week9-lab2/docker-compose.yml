@@ -1,5 +1,5 @@
 services:
-  app:
+  frontend:
     build: ./mybookstore102
     ports:
       - "3001:80"
