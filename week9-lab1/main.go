@@ -9,6 +9,7 @@ import (
 	"time"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
+	"github.com/gin-contrib/cors"
 )
 
 type Book struct {
@@ -196,12 +197,15 @@ func deleteBook(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "book deleted successfully"})
 }
 
+
 func main() {
 	initDB()
 	defer db.Close()
 
-	r := gin.Default()
 
+	r := gin.Default()
+	r.Use(cors.Default())
+	// เพิ่ม CORS middleware
 	r.GET("/health", func(c *gin.Context) {
 		err := db.Ping()
 		if err != nil {
