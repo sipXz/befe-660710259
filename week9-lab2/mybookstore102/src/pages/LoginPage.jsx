@@ -13,7 +13,7 @@ const LoginPage = () => {
     setError('');
 
     // Validate credentials
-    if (username === 'bookstoreadmin' && password === 'ManageBook68') {
+    if (username === 'bookstoreadmin' && password === '1') {
       // Store authentication token/flag
       localStorage.setItem('isAdminAuthenticated', 'true');
       navigate('/Allbook');

@@ -95,7 +95,9 @@ func getAllBooks(c *gin.Context) {
     var err error
 
     // ลูกค้าถาม "มีหนังสืออะไรบ้าง"
-    rows, err = db.Query("SELECT id, title, author, isbn, year, price, created_at, updated_at FROM books")
+    rows, err = db.Query(`SELECT id, title, author, isbn, year, price, category, 
+        original_price, discount, cover_image, rating, reviews_count, is_new, 
+        pages, language, publisher, description, created_at, updated_at FROM books`)
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
         return
@@ -105,7 +107,11 @@ func getAllBooks(c *gin.Context) {
     var books []Book
     for rows.Next() {
         var book Book
-        err := rows.Scan(&book.ID, &book.Title, &book.Author, &book.ISBN, &book.Year, &book.Price, &book.CreatedAt, &book.UpdatedAt)
+        err := rows.Scan(&book.ID, &book.Title, &book.Author, &book.ISBN, &book.Year, 
+            &book.Price, &book.Category, &book.OriginalPrice, &book.Discount, 
+            &book.CoverImage, &book.Rating, &book.ReviewsCount, &book.IsNew, 
+            &book.Pages, &book.Language, &book.Publisher, &book.Description, 
+            &book.CreatedAt, &book.UpdatedAt)
         if err != nil {
             // handle error
         }
